@@ -34,10 +34,10 @@
     "@fullcalendar/timegrid": "^6.1.15",
     "@ngrx/signals": "^21.0.0",
     "@types/three": "^0.169.0",
-    "apexcharts": "^3.54.0",
+    "apexcharts": "^5.12.0",
     "gsap": "^3.12.5",
     "lenis": "^1.1.14",
-    "ng-apexcharts": "^1.10.0",
+    "ng-apexcharts": "^2.3.0",
     "rxjs": "~7.8.0",
     "three": "^0.169.0",
     "tslib": "^2.7.0"
@@ -53,6 +53,6 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "^6.0.3"
+    "typescript": "~5.9.3"
   }
 }

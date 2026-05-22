@@ -11,7 +11,7 @@ import { faThreads, faInstagram, faXTwitter, faLinkedin, faYoutube } from "@fort
         <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px;" class="footer-grid">
           <div>
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
-              <div style="width:36px;height:36px;background:var(--primary);border-radius:8px;display:flex;align-items:center;justify-content:center;"><span style="color:#fff;font-weight:700;font-size:.875rem;font-family:var(--font-display);">GU</span></div>
+              <img src="assets/images/logo.png" alt="GU Logo" style="width:36px;height:36px;" />
               <span style="font-family:var(--font-display);font-weight:700;color:#fff;">Greenfield University</span>
             </div>
             <p style="font-size:.9rem;color:rgba(255,255,255,.42);line-height:1.7;max-width:280px;margin-bottom:24px;">World-class education built for African learners. Accredited. Accessible. Life-changing.</p>

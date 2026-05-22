@@ -24,9 +24,7 @@ interface NavItem { label: string; path: string; icon: any; }
   template: `
     <aside class="portal-sidebar">
       <div style="padding:20px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;">
-        <div style="width:34px;height:34px;background:var(--primary);border-radius:8px;display:flex;align-items:center;justify-content:center;">
-          <span style="color:#fff;font-weight:700;font-size:.875rem;font-family:var(--font-display);">GU</span>
-        </div>
+        <img src="assets/images/logo.png" alt="GU Logo" style="width:34px;height:34px;" />
         <div>
           <div style="font-weight:700;font-size:.9375rem;font-family:var(--font-display);color:var(--text);">Greenfield</div>
           <div style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;">{{ roleLabel() }}</div>

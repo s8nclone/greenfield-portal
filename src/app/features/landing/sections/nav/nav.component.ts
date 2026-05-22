@@ -15,9 +15,7 @@ import { RouterLink } from "@angular/router";
   template: `
     <nav [class.scrolled]="scrolled()" class="nav-root">
       <a routerLink="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;">
-        <div style="width:36px;height:36px;background:var(--primary);border-radius:8px;display:flex;align-items:center;justify-content:center;">
-          <span style="color:#fff;font-weight:700;font-size:.875rem;font-family:var(--font-display);">GU</span>
-        </div>
+        <img src="assets/images/logo.png" alt="GU Logo" style="width:36px;height:36px;" />
         <span style="font-family:var(--font-display);font-weight:700;font-size:1rem;color:#fff;">Greenfield University</span>
       </a>
       <div class="nav-links" style="display:flex;align-items:center;gap:32px;flex:1;justify-content:center;">
@@ -42,6 +40,7 @@ export class NavComponent {
     { label: "Experience", href: "#experience" },
     { label: "FAQ", href: "#faq" },
   ];
+
   constructor() {
     afterNextRender(() => {
       window.addEventListener("scroll", () => this.scrolled.set(window.scrollY > 40), { passive: true });

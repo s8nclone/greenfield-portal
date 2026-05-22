@@ -4,7 +4,8 @@ import { AuthStore } from "@core/auth/auth.store";
 import { AuthService } from "@core/auth/auth.service";
 import { AvatarComponent } from "@shared/components/avatar/avatar.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { faHome, faBook, faPen, faClipboard, faFileSignature, faTrophy, faBookOpen, faCommentDots, faCalendarDays, faUser, faUsers, faFlask, faBullseye, faCalendarAlt, faChartBar, faBullhorn, faGear } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faBook, faPen, faClipboard, faFileSignature, faTrophy, faBookOpen, faCommentDots, faCalendarDays, faUser, faUsers, faFlask, faBullseye, faCalendarAlt, faChartBar, faBullhorn, faGear, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { SidebarStateService } from "@core/services/sidebar-state.service";
 
 interface NavItem { label: string; path: string; icon: any; }
 
@@ -20,22 +21,37 @@ interface NavItem { label: string; path: string; icon: any; }
       background: var(--primary-light); color: var(--primary); font-weight: 600;
     }
     .nav-section { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); padding: 16px 16px 6px; }
+    .mobile-close-btn {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .mobile-close-btn {
+        display: flex; align-items: center; justify-content: center;
+        width: 32px; height: 32px; border-radius: var(--radius-md);
+        background: var(--surface-raised); color: var(--text-secondary);
+        font-size: 1rem; cursor: pointer; transition: .2s;
+      }
+      .mobile-close-btn:hover { background: var(--border); color: var(--text); }
+    }
   `],
   template: `
-    <aside class="portal-sidebar">
+    <aside class="portal-sidebar" [class.sidebar-open]="sidebarState.isOpen()">
       <div style="padding:20px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;">
-        <div class="logo-container" style="width:34px;height:34px;">
+        <div class="logo-container" style="width:34px;height:34px;flex-shrink:0;">
           <img src="assets/images/logo.png" alt="GU Logo" style="width:100%;height:100%;object-fit:contain;" />
         </div>
-        <div>
-          <div style="font-weight:700;font-size:.9375rem;font-family:var(--font-display);color:var(--text);">Greenfield</div>
-          <div style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;">{{ roleLabel() }}</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-weight:700;font-size:.9375rem;font-family:var(--font-display);color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Greenfield</div>
+          <div style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ roleLabel() }}</div>
         </div>
+        <button class="mobile-close-btn" (click)="sidebarState.close()" title="Close sidebar">
+          <fa-icon [icon]="faXmark"></fa-icon>
+        </button>
       </div>
 
       <nav style="flex:1;padding:12px 8px;overflow-y:auto;">
         @for (item of navItems(); track item.path) {
-          <a [routerLink]="item.path" routerLinkActive="active-link" class="nav-link">
+          <a [routerLink]="item.path" routerLinkActive="active-link" class="nav-link" (click)="sidebarState.close()">
             <span style="font-size:1rem;width:20px;text-align:center;"><fa-icon [icon]="item.icon"></fa-icon></span>
             <span>{{ item.label }}</span>
           </a>
@@ -50,7 +66,7 @@ interface NavItem { label: string; path: string; icon: any; }
             <div style="font-size:.7rem;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ store.user()?.email }}</div>
           </div>
         </div>
-        <button (click)="auth.logout()" style="width:100%;padding:8px;border-radius:var(--radius-md);background:var(--surface-raised);color:var(--text-secondary);font-size:.8125rem;font-weight:600;font-family:var(--font-display);transition:.2s;" onmouseover="this.style.background='var(--error-light)';this.style.color='var(--error)'" onmouseout="this.style.background='var(--surface-raised)';this.style.color='var(--text-secondary)'">
+        <button (click)="auth.logout(); sidebarState.close()" style="width:100%;padding:8px;border-radius:var(--radius-md);background:var(--surface-raised);color:var(--text-secondary);font-size:.8125rem;font-weight:600;font-family:var(--font-display);transition:.2s;" onmouseover="this.style.background='var(--error-light)';this.style.color='var(--error)'" onmouseout="this.style.background='var(--surface-raised)';this.style.color='var(--text-secondary)'">
           Sign Out
         </button>
       </div>
@@ -59,8 +75,11 @@ interface NavItem { label: string; path: string; icon: any; }
 })
 
 export class SidebarComponent {
+  faXmark = faXmark;
+
   readonly store = inject(AuthStore);
   readonly auth = inject(AuthService);
+  readonly sidebarState = inject(SidebarStateService);
 
   readonly roleLabel = computed(() => {
     const map: Record<string, string> = { STUDENT: "Student Portal", STAFF: "Staff Portal", ADMIN: "Admin Portal" };
@@ -104,3 +123,4 @@ export class SidebarComponent {
     ];
   });
 }
+

@@ -4,13 +4,18 @@ import { AuthStore } from "@core/auth/auth.store";
 import { ThemeService } from "@core/services/theme.service";
 import { AvatarComponent } from "@shared/components/avatar/avatar.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
+import { faSun, faMoon, faBars } from "@fortawesome/free-solid-svg-icons";
+import { SidebarStateService } from "@core/services/sidebar-state.service";
 
 @Component({
   selector: "app-topbar",
   imports: [AvatarComponent, RouterLink, FontAwesomeModule],
   template: `
     <header class="portal-topbar">
+      <button class="hamburger-btn" (click)="sidebarState.toggle()" title="Toggle sidebar">
+        <fa-icon [icon]="faBars"></fa-icon>
+      </button>
+
       <div style="flex:1;">
         <div style="font-size:.8125rem;color:var(--text-muted);">Welcome back,</div>
         <div style="font-size:.9375rem;font-weight:700;font-family:var(--font-display);color:var(--text);">{{ store.user()?.firstName }} {{ store.user()?.lastName }}</div>
@@ -21,7 +26,7 @@ import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
           <fa-icon [icon]="theme.isDark() ? faSun : faMoon"></fa-icon>
         </button>
 
-        <a routerLink="/" style="padding:8px 14px;border-radius:var(--radius-md);background:var(--surface-raised);font-size:.8125rem;font-weight:600;color:var(--text-secondary);font-family:var(--font-display);transition:.2s;" title="Back to website">
+        <a routerLink="/" class="sm-hidden" style="padding:8px 14px;border-radius:var(--radius-md);background:var(--surface-raised);font-size:.8125rem;font-weight:600;color:var(--text-secondary);font-family:var(--font-display);transition:.2s;" title="Back to website">
           ← Website
         </a>
 
@@ -34,7 +39,10 @@ import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 export class TopbarComponent {
   faSun = faSun;
   faMoon = faMoon;
+  faBars = faBars;
 
   readonly store = inject(AuthStore);
   readonly theme = inject(ThemeService);
+  readonly sidebarState = inject(SidebarStateService);
 }
+

@@ -5,6 +5,14 @@ import { faThreads, faInstagram, faXTwitter, faLinkedin, faYoutube } from "@fort
 @Component({
   selector: "landing-footer",
   imports: [FontAwesomeModule],
+  styles: [`
+    @media (max-width: 900px) {
+      .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 32px !important; }
+    }
+    @media (max-width: 600px) {
+      .footer-grid { grid-template-columns: 1fr !important; }
+    }
+  `],
   template: `
     <footer style="background:var(--ink);padding:clamp(60px,8vw,100px) clamp(24px,6vw,80px) 40px;border-top:1px solid rgba(255,255,255,.07);">
       <div style="max-width:1200px;margin:0 auto;">

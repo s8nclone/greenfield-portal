@@ -66,8 +66,9 @@ export class LandingComponent {
   private initReveal(): void {
     const observer = new IntersectionObserver(
       (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); observer.unobserve(e.target); } }),
-      { threshold: 0.12 }
+      { threshold: 0.05 }
     );
     document.querySelectorAll(".reveal, .reveal-left, .reveal-scale").forEach(el => observer.observe(el));
   }
+
 }

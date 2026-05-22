@@ -417,10 +417,62 @@ html.lenis, html.lenis body { height: auto; }
   overflow-y: auto;
 }
 
-/* Responsive — collapse sidebar on mobile */
+/* Responsive — sidebar becomes overlay drawer on mobile */
 @media (max-width: 768px) {
-  .portal-sidebar { display: none; }
   :root { --sidebar-width: 0px; }
+
+  /* Sidebar in mobile: fixed overlay drawer, toggled by signal */
+  .portal-sidebar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 260px !important;
+    z-index: 200;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(.16,1,.3,1);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .portal-sidebar.sidebar-open {
+    transform: translateX(0);
+  }
+}
+
+/* Backdrop shown behind the mobile drawer */
+.sidebar-backdrop {
+  display: none;
+}
+@media (max-width: 768px) {
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    z-index: 199;
+    animation: fade-in .2s ease both;
+  }
+}
+
+/* Hamburger button — visible only on mobile */
+.hamburger-btn {
+  display: none;
+}
+@media (max-width: 768px) {
+  .hamburger-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    background: var(--surface-raised);
+    color: var(--text);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    transition: background .2s;
+  }
+  .hamburger-btn:hover { background: var(--border); }
 }
 
 /* Table */
@@ -478,3 +530,8 @@ html.lenis, html.lenis body { height: auto; }
   background: rgba(255, 255, 255, 0.08);
 }
 
+.sm-hidden {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}

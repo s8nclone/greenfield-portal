@@ -19,7 +19,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
         </div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;" class="testi-grid">
           @for (t of visible(); track t.name) {
-            <div [class.active]="$index === 0" class="testi-card reveal">
+            <div [class.active]="$index === 0" class="testi-card animate-fade-in-up">
               <div style="display:flex;gap:4px;margin-bottom:16px;">
                 @for (s of stars; track $index) { <span style="color:var(--gold);font-size:1rem;"><fa-icon [icon]="faStar"></fa-icon></span> }
               </div>

@@ -21,7 +21,9 @@ interface Cred {
       <!-- Left panel -->
       <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:clamp(32px,8vw,80px);max-width:520px;">
         <a href="/" style="display:inline-flex;align-items:center;gap:8px;margin-bottom:48px;text-decoration:none;">
-          <img src="assets/images/logo.png" alt="GU Logo" style="width:34px;height:34px;" />
+          <div class="logo-container" style="width:34px;height:34px;">
+            <img src="assets/images/logo.png" alt="GU Logo" style="width:100%;height:100%;object-fit:contain;" />
+          </div>
           <span style="font-weight:700;font-size:1rem;font-family:var(--font-display);color:var(--text);">Greenfield University</span>
         </a>
 

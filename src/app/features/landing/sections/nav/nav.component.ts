@@ -15,7 +15,9 @@ import { RouterLink } from "@angular/router";
   template: `
     <nav [class.scrolled]="scrolled()" class="nav-root">
       <a routerLink="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;">
-        <img src="assets/images/logo.png" alt="GU Logo" style="width:36px;height:36px;" />
+        <div class="logo-container-dark" style="width:36px;height:36px;">
+          <img src="assets/images/logo.png" alt="GU Logo" style="width:100%;height:100%;object-fit:contain;" />
+        </div>
         <span style="font-family:var(--font-display);font-weight:700;font-size:1rem;color:#fff;">Greenfield University</span>
       </a>
       <div class="nav-links" style="display:flex;align-items:center;gap:32px;flex:1;justify-content:center;">
